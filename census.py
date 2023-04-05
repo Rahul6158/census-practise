@@ -20,9 +20,9 @@ for name in names:
 st.sidebar.title("Under The Guidance of :")
 st.sidebar.write("Dr.Bomma.Ramakrishna")
 # File upload
-uploaded_file = pd.read_csv(r"C:\Users\Rahul\Desktop\indiancensus\6. India Census 2011.csv")
+uploaded_file = ("Enter Indian Census Dataset")
 if uploaded_file is not None:
-    data= (uploaded_file)
+    data= pd.read_csv(uploaded_file)
     st.dataframe(data)
 
     st.title("India Census Data Analysis")
@@ -41,5 +41,5 @@ if uploaded_file is not None:
     if st.checkbox("Add a Suffix to the column names"):
         st.write(data.add_suffix('_rightone'))
     if st.checkbox("Add a Prefix to the column names"):
-        st.write(data.add_prefix('leftone_'))
+        st.write(data.add_prefix('prefix_'))
         
