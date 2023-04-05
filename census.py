@@ -20,7 +20,7 @@ for name in names:
 st.sidebar.title("Under The Guidance of :")
 st.sidebar.write("Dr.Bomma.Ramakrishna")
 # File upload
-uploaded_file = pd.read_csv("C:\Users\Rahul\Desktop\indiancensus\6. India Census 2011.csv")
+uploaded_file = pd.read_csv(r"C:\Users\Rahul\Desktop\indiancensus\6. India Census 2011.csv")
 if uploaded_file is not None:
     data= (uploaded_file)
     st.dataframe(data)
