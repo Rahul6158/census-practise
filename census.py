@@ -21,23 +21,27 @@ for name in names:
 st.sidebar.title("Under The Guidance of :")
 st.sidebar.write("Dr.Bomma.Ramakrishna")
 # File upload
-data=pd.read_csv(r"C:\Users\Rahul\Desktop\indiancensus\census.py")
-st.dataframe(data)
+uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
+uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
+if uploaded_file is not None:
+    data=pd.read_csv(uploaded_file)
+    st.dataframe(data)
 
-st.title("India Census Data Analysis")
-if st.checkbox("How will you hide the indexes of the dataframe?"):
+    st.title("India Census Data Analysis")
+    if st.checkbox("How will you hide the indexes of the dataframe?"):
         st.write(data.style.hide_index())
-if st.checkbox("How can we set the caption / heading on the dataframe?"):
+    if st.checkbox("How can we set the caption / heading on the dataframe?"):
         st.write(data.style.set_caption('India Census 2011 Dataset'))
-if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
+    if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
         st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
-if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
+    if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
         st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
-if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
+    if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
         st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
-if st.checkbox(" How to set a column as index of the dataframe ?"):
+    if st.checkbox(" How to set a column as index of the dataframe ?"):
         st.write(data.set_index('District_code'))
-if st.checkbox("Add a Suffix to the column names"):
+    if st.checkbox("Add a Suffix to the column names"):
         st.write(data.add_suffix('_rightone'))
-if st.checkbox("Add a Prefix to the column names"):
+    if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
+        
