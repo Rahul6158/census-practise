@@ -22,7 +22,6 @@ st.sidebar.title("Under The Guidance of :")
 st.sidebar.write("Dr.Bomma.Ramakrishna")
 # File upload
 uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
-uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
 if uploaded_file is not None:
     data=pd.read_csv(uploaded_file)
     st.dataframe(data)
