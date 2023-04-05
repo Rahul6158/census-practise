@@ -15,15 +15,14 @@ names = ["21A21A6111-E Jeji Anil", "21A21A6158-Tusha Rahul B ", "21A21A6137-M S 
 st.title("Exploratory Data Analysis on India Census Data Set")
 # Add the names to the sidebar
 st.sidebar.title("Project Team Members:")
-
 for name in names:
     st.sidebar.write(name)
 st.sidebar.title("Under The Guidance of :")
 st.sidebar.write("Dr.Bomma.Ramakrishna")
 # File upload
-uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
+uploaded_file = pd.read_csv("https://github.com/Rahul6158/census-practise/blob/main/6.%20India%20Census%202011.csv")
 if uploaded_file is not None:
-    data=pd.read_csv(uploaded_file)
+    data= (uploaded_file)
     st.dataframe(data)
 
     st.title("India Census Data Analysis")
