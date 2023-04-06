@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import plotly.express as px 
 import random
 from PIL import Image
 logo = Image.open('logo.png')
@@ -44,4 +45,5 @@ if uploaded_file is not None:
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
     
+pie_chart = px.pie(uploaded_file,title = 'census chart')
 st.plotly_chart(pie_chart)
