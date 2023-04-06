@@ -25,7 +25,7 @@ uploaded_file = st.file_uploader("Choose a India Census Dataset csv")
 if uploaded_file is not None:
     data=pd.read_csv(uploaded_file)
     st.dataframe(data)
-
+    st.plotly_chart(pie_chart)
     st.title("India Census Data Analysis")
     if st.checkbox("How will you hide the indexes of the dataframe?"):
         st.write(data.style.hide_index())
