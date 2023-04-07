@@ -57,8 +57,8 @@ if uploaded_file is not None:
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Which state has the highest literacy rate?"):
-        highest_literacy = data.groupby('State_name').agg({'Literacy_rate': 'mean'}).sort_values(by='Literacy_rate', ascending=False).head(1)
-        st.write(f"{highest_literacy.index[0]} has the highest literacy rate of {highest_literacy['Literacy_rate'][0]}")
+        highest_literacy = data.groupby('State_name').agg({'Literature': 'mean'}).sort_values(by='Literature', ascending=False).head(1)
+        st.write(f"{highest_literacy.index[0]} has the highest literacy rate of {highest_literacy['Literature'][0]}")
         fig = px.bar(data, x='State_name', y='Literacy_rate', title='Literacy rate by state', height=500)
         fig.update_layout(xaxis_title='State', yaxis_title='Literacy rate')
         st.plotly_chart(fig)
