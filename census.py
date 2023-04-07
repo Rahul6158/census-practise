@@ -28,14 +28,23 @@ if uploaded_file is not None:
     st.dataframe(data)
     
     st.title("India Census Data Analysis")
-    if st.checkbox("How will you hide the indexes of the dataframe?"):
-        st.write(data.style.hide_index())
+    if st.checkbox("What are the columns present in the dataset"):
+        st.write(data.columns)
     if st.checkbox("How can we set the caption / heading on the dataframe?"):
         st.write(data.style.set_caption('India Census 2011 Dataset'))
     if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
         st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
     if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
         st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
+    if st.checkbox("Show the percentages of Religions in India by a piechart"):
+        fig = plt.figure(figsize=(50,25))
+        ax1 = plt.subplot(312)
+        explode = (0, 0.1, 0, 0)
+        labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
+        val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
+        ax1.pie(val, explode=explode, labels=labels, autopct='%1.1f%%', shadow=False, startangle=270)
+        plt.title('Pie Chart of Religions')
+        st.pyplot(fig)
     if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
         st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
     if st.checkbox(" How to set a column as index of the dataframe ?"):
@@ -44,12 +53,5 @@ if uploaded_file is not None:
         st.write(data.add_suffix('_rightone'))
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
-    if st.checkbox("Show the percentages of Religions in India"):
-        fig = plt.figure(figsize=(24,12))
-        ax1 = plt.subplot(312)
-        explode = (0, 0.1, 0, 0)
-        labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
-        val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
-        ax1.pie(val, explode=explode, labels=labels, autopct='%1.1f%%', shadow=False, startangle=270)
-        plt.title('Pie Chart of Religions')
-        st.pyplot(fig)
+    if st.checkbox("Show the number of Educated people by state"):
+        st.write("The number of Educated people : ",data.groupby('State_name')[['Literate'].sum()])
