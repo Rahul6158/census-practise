@@ -29,6 +29,7 @@ if uploaded_file is not None:
     
     st.title("India Census Data Analysis")
     if st.checkbox("How will you hide the indexes of the dataframe?"):
+        st.write(data.style.hide_index())
     if st.checkbox("How can we set the caption / heading on the dataframe?"):
         st.write(data.style.set_caption('India Census 2011 Dataset'))
     if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
@@ -44,11 +45,5 @@ if uploaded_file is not None:
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
     if st.checkbox("Show the percentages of Religions in India"):
-        fig=plt.figure(figsize=(50,25))
-        ax1=plt.subplot(312)
-        explode=(0,0.1,0,0)
-        labels=['Sikhs','Christians','Jains','Buddhists']
-        val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
-        ax1.pie(val, explode=explode, labels = labels, autopct = '%1.1f%%',shadow=False,startangle=270);
-        plt.title('piechat of Religions')
-        plt.show()
+        st.write
+        fig=plt.figure(figsize=(50,25));ax1=plt.subplot(312);explode=(0,0.1,0,0);labels=['Sikhs','Christians','Jains','Buddhists'];val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()];ax1.pie(val, explode=explode, labels = labels, autopct = '%1.1f%%',shadow=False,startangle=270);plt.title('piechat of Religions');plt.show()
