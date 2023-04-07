@@ -44,6 +44,7 @@ if uploaded_file is not None:
         st.write(data.add_suffix('_rightone'))
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
-    
-pie_chart = px.pie(uploaded_file,title = 'census chart')
-st.plotly_chart(pie_chart)
+    if st.checkbox("Add a Prefix to the column names"):
+        st.write(data.add_prefix('leftone_'))
+    if st.checkbox("Show the percentages of Religions in India"):
+        st.write(fig=plt.figure(figsize=(50,25));ax1=plt.subplot(312);explode=(0,0.1,0,0);labels=['Sikhs','Christians','Jains','Buddhists'];val = [uploaded_file.Sikhs.sum(),uploaded_file.Christians.sum(),uploaded_file.Jains.sum(),uploaded_file.Buddhists.sum()];ax1.pie(val, explode=explode, labels = labels, autopct = '%1.1f%%',shadow=False,startangle=270);plt.title('piechat of Religions');plt.show();)
