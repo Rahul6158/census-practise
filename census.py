@@ -44,8 +44,6 @@ if uploaded_file is not None:
         st.write(data.add_suffix('_rightone'))
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
-    if st.checkbox("Add a Prefix to the column names"):
-        st.write(data.add_prefix('leftone_'))
     if st.checkbox("Show the percentages of Religions in India"):
         fig=plt.figure(figsize=(50,25))
         ax1=plt.subplot(312)
