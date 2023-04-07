@@ -52,4 +52,4 @@ if uploaded_file is not None:
         val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
         ax1.pie(val, explode=explode, labels = labels, autopct = '%1.1f%%',shadow=False,startangle=270);
         plt.title('piechat of Religions')
-        plt.show()
+        st.write(plt.show())
