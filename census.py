@@ -54,4 +54,4 @@ if uploaded_file is not None:
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
     if st.checkbox("Show the number of Educated people by state"):
-        st.write(data.State_name,data.Literate)
+        st.write(data[data['State_name'].isin(['Literate'])])
