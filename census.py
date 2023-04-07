@@ -29,7 +29,6 @@ if uploaded_file is not None:
     
     st.title("India Census Data Analysis")
     if st.checkbox("How will you hide the indexes of the dataframe?"):
-        st.write(data.style.hide_index())
     if st.checkbox("How can we set the caption / heading on the dataframe?"):
         st.write(data.style.set_caption('India Census 2011 Dataset'))
     if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
@@ -52,4 +51,4 @@ if uploaded_file is not None:
         val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
         ax1.pie(val, explode=explode, labels = labels, autopct = '%1.1f%%',shadow=False,startangle=270);
         plt.title('piechat of Religions')
-        st.write(plt.show())
+        plt.show()
