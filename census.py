@@ -55,4 +55,4 @@ if uploaded_file is not None:
         st.write(data.add_prefix('leftone_'))
     if st.checkbox("Which state has the highest population?"):
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
-        st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]}")
+        st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
