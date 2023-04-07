@@ -53,5 +53,6 @@ if uploaded_file is not None:
         st.write(data.add_suffix('_rightone'))
     if st.checkbox("Add a Prefix to the column names"):
         st.write(data.add_prefix('leftone_'))
-    if st.checkbox("Show the number of Educated people by state"):
-        st.write(data[data['State_name'].isin(['Literate'])])
+        if st.checkbox("Which state has the highest population?"):
+           highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
+           st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]}")
