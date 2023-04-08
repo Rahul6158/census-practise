@@ -85,13 +85,20 @@ if uploaded_file is not None:
         st.pyplot(fig)
 
     if st.checkbox("Show the population of selected districts and states"):
-        district_names = sorted(data['District_name'].unique())
-        state_names = sorted(data['State_name'].unique())
-        selected_states = st.multiselect('Select states:', state_names)
-        selected_districts = st.multiselect('Select districts:', district_names)
-        selected_data = data[(data['District_name'].isin(selected_districts)) & (data['State_name'].isin(selected_states))]
-        print("\n\n")
-        if not selected_data.empty:
-            st.write(selected_data.groupby(['State_name', 'District_name']).agg({'Population': 'sum'}))
+        state_options = data["State_name"].unique()
+        district_options = {}
+
+        # Iterate over each state to get the districts in that state
+        for state in state_options:
+           district_options[state] = data.loc[data["State_name"] == state, "District_name"].unique()
+
+        # Add the multiselect widgets to the sidebar
+        selected_state = st.sidebar.selectbox("Select a state", state_options)
+        selected_districts = st.sidebar.multiselect("Select districts", district_options[selected_state])
+
+        # Filter the data based on the selected state and districts
+        if selected_districts:
+            filtered_data = data.loc[(data["State_name"] == selected_state) & (data["District_name"].isin(selected_districts))]
         else:
-            st.warning('No data available for the selected districts and states.')
+            filtered_data = data.loc[data["State_name"] == selected_state]
+        st.write(filtered_data)
