@@ -42,7 +42,7 @@ if uploaded_file is not None:
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
-        fig = plt.figure(figsize=(10,10))
+        fig = plt.figure(figsize=(20,10))
         ax1 = plt.subplot(312)
         explode = (0, 0.1, 0, 0)
         labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
