@@ -87,9 +87,10 @@ if uploaded_file is not None:
     if st.checkbox("Show the population of selected districts and states"):
         district_names = sorted(data['District_name'].unique())
         state_names = sorted(data['State_name'].unique())
-        selected_districts = st.multiselect('Select districts:', district_names)
         selected_states = st.multiselect('Select states:', state_names)
+        selected_districts = st.multiselect('Select districts:', district_names)
         selected_data = data[(data['District_name'].isin(selected_districts)) & (data['State_name'].isin(selected_states))]
+        print("\n\n")
         if not selected_data.empty:
             st.write(selected_data.groupby(['State_name', 'District_name']).agg({'Population': 'sum'}))
         else:
