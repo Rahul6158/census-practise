@@ -84,7 +84,7 @@ if uploaded_file is not None:
         plt.legend()
         st.pyplot(fig)
 
-    if st.button("Show the population of selected districts and states"):
+    if st.checkbox("Show the population of selected districts and states"):
         state_options = data["State_name"].unique()
         district_options = {}
         for state in state_options:
