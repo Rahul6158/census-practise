@@ -68,7 +68,7 @@ if uploaded_file is not None:
         fig = px.bar(workers, x=workers.index, y=['Male_Workers', 'Female_Workers'], title='Number of Male and Female Workers by State', barmode='group', height=500)
         st.plotly_chart(fig)
     
-    if st.checkbox("Visualize the population by state as a line chart"):
+    if st.checkbox("Population by state on a line chart"):
         pop_data = data.groupby('State_name').agg({'Population': 'sum'}).reset_index()
         fig = px.line(pop_data, x='State_name', y='Population', title='Line Chart Population by State')
         st.plotly_chart(fig)
@@ -83,3 +83,14 @@ if uploaded_file is not None:
         ax.set_ylabel('Frequency')
         plt.legend()
         st.pyplot(fig)
+
+    if st.checkbox("Show the population of selected districts and states"):
+        district_names = sorted(data['District_name'].unique())
+        state_names = sorted(data['State_name'].unique())
+        selected_districts = st.multiselect('Select districts:', district_names)
+        selected_states = st.multiselect('Select states:', state_names)
+        selected_data = data[(data['District_name'].isin(selected_districts)) & (data['State_name'].isin(selected_states))]
+        if not selected_data.empty:
+            st.write(selected_data.groupby(['State_name', 'District_name']).agg({'Population': 'sum'}))
+        else:
+            st.warning('No data available for the selected districts and states.')
