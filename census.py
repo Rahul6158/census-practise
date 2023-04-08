@@ -36,6 +36,11 @@ if uploaded_file is not None:
         st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
     if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
         st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
+    if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
+        st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
+    if st.checkbox("Which state has the highest population?"):
+        highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
+        st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
         fig = plt.figure(figsize=(50,25))
         ax1 = plt.subplot(312)
@@ -45,17 +50,6 @@ if uploaded_file is not None:
         ax1.pie(val, explode=explode, labels=labels, autopct='%1.1f%%', shadow=False, startangle=270)
         plt.title('Pie Chart of Religions')
         st.pyplot(fig)
-    if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
-        st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
-    if st.checkbox(" How to set a column as index of the dataframe ?"):
-        st.write(data.set_index('District_code'))
-    if st.checkbox("Add a Suffix to the column names"):
-        st.write(data.add_suffix('_rightone'))
-    if st.checkbox("Add a Prefix to the column names"):
-        st.write(data.add_prefix('leftone_'))
-    if st.checkbox("Which state has the highest population?"):
-        highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
-        st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Which state has the highest literacy rate?"):
         highest_literacy = data.groupby('State_name').agg({'Literate': 'mean'}).sort_values(by='Literate', ascending=True).head(1)
         fig = px.bar(data, x='State_name', y='Literate', title='Literacy rate by state', height=500)
