@@ -43,7 +43,7 @@ if uploaded_file is not None:
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
         fig = plt.figure(figsize=(50,25))
-        ax1 = plt.subplot(312)
+        ax1 = plt.subplot(212)
         explode = (0, 0.1, 0, 0)
         labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
         val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
