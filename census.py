@@ -75,7 +75,7 @@ if uploaded_file is not None:
     
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue',histmode='group')
+        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue')
         ax.hist(data['Age_Group_30_49'], bins=10,color='blue')
         ax.hist(data['Age_Group_50'], bins=10,color='indigo')
         ax.set_title('Histogram of Age Group Population')
@@ -83,3 +83,9 @@ if uploaded_file is not None:
         ax.set_ylabel('Frequency')
         plt.show()
             
+    if st.checkbox("A doughnut plot for Statewise districts"):
+        district_counts = data['State_name'].value_counts()
+        explode = [0.1 if i == district_counts.idxmax() else 0 for i in district_counts.index]
+        plt.pie(district_counts, labels=district_counts.index, explode=explode, autopct='%1.1f%%', startangle=90)
+        plt.title('Number of Districts per State')
+        plt.show()
