@@ -82,10 +82,3 @@ if uploaded_file is not None:
         ax.set_xlabel('Total Population')
         ax.set_ylabel('Frequency')
         plt.show()
-            
-    if st.checkbox("A doughnut plot for Statewise districts"):
-        district_counts = data['State_name'].value_counts()
-        explode = [0.1 if i == district_counts.idxmax() else 0 for i in district_counts.index]
-        plt.pie(district_counts, labels=district_counts.index, explode=explode, autopct='%1.1f%%', startangle=90)
-        plt.title('Number of Districts per State')
-        plt.show()
