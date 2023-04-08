@@ -31,12 +31,6 @@ if uploaded_file is not None:
     if st.checkbox("What are the columns present in the dataset"):
         st.write(data.columns)
     
-    if st.checkbox("How can we set the caption / heading on the dataframe?"):
-        st.write(data.style.set_caption('India Census 2011 Dataset'))
-    
-    if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
-        st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
-    
     if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
         st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
     
@@ -84,7 +78,7 @@ if uploaded_file is not None:
         plt.legend()
         st.pyplot(fig)
 
-    if st.header("Check the Population of selected districts and states"):
+    if st.header("Check the Details of Selected States and Districts"):
         state_options = data["State_name"].unique()
         district_options = {}
         for state in state_options:
