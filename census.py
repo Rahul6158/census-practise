@@ -8,7 +8,7 @@ import random
 from PIL import Image
 logo = Image.open('logo.png')
 #pip install pandas numpy matplotlib seaborn streamlit
-#to run streamlit :   streamlit run netflix.py 
+#to run streamlit :   streamlit run census.py 
 st.set_page_config(page_title="INDIA CENSUS  EDA", page_icon=":bar_chart:", layout="wide")
 st.image(logo)
 # Define the list of names
@@ -42,8 +42,8 @@ if uploaded_file is not None:
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
-        fig = plt.figure(figsize=(50,25))
-        ax1 = plt.subplot(212)
+        fig = plt.figure(figsize=(10,10))
+        ax1 = plt.subplot(312)
         explode = (0, 0.1, 0, 0)
         labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
         val = [data.Sikhs.sum(),data.Christians.sum(),data.Jains.sum(),data.Buddhists.sum()]
