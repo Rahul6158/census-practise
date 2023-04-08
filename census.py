@@ -75,6 +75,7 @@ if uploaded_file is not None:
     
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
+        colors = ['red', 'green', 'blue', 'orange', 'purple']
         ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue')
         ax.hist(data['Age_Group_30_49'], bins=10,color='blue')
         ax.hist(data['Age_Group_50'], bins=10,color='indigo')
@@ -84,3 +85,5 @@ if uploaded_file is not None:
         plt.show()
         for i, color in enumerate(colors):
             print(f"Group {i+1} color: {color}")
+
+            
