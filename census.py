@@ -61,3 +61,11 @@ if uploaded_file is not None:
         st.write(f"{highest_literacy.index[0]} has the highest literacy rate of {highest_literacy['Literate'][0]}")
         fig = px.bar(data, x='State_name', y='Literate', title='Literacy rate by state', height=500)
         st.plotly_chart(fig)
+    if st.checkbox("Which states have the highest number of male and female workers?"):
+        workers = data.groupby('State_name').agg({'Male_Workers': 'sum', 'Female_Workers': 'sum'}).sort_values(by='Male_Workers', ascending=False).head(10)
+        fig = px.bar(workers, x=workers.index, y=['Male_Workers', 'Female_Workers'], title='Number of Male and Female Workers by State', barmode='group', height=500)
+        st.plotly_chart(fig)
+    if st.checkbox("Visualize the population by state as a line chart"):
+        pop_data = data.groupby('State_name').agg({'Population': 'sum'}).reset_index()
+        fig = px.line(pop_data, x='State_name', y='Population', title='Line Chart Population by State')
+        st.plotly_chart(fig)
