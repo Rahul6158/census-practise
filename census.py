@@ -42,7 +42,8 @@ if uploaded_file is not None:
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
-        fig = plt.figure(figsize=(20,10))
+        st.write()
+        fig = plt.figure(figsize=(25,12))
         ax1 = plt.subplot(312)
         explode = (0, 0.1, 0, 0)
         labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
@@ -62,3 +63,10 @@ if uploaded_file is not None:
         pop_data = data.groupby('State_name').agg({'Population': 'sum'}).reset_index()
         fig = px.line(pop_data, x='State_name', y='Population', title='Line Chart Population by State')
         st.plotly_chart(fig)
+    if st.checkbox("Histogram for showing the Age Groups"):
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.hist(data['Total_Population'], bins=10)
+        ax.set_title('Histogram of Age Group Population')
+        ax.set_xlabel('Total Population')
+        ax.set_ylabel('Frequency')
+        st.pyplot(fig)
