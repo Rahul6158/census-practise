@@ -58,7 +58,6 @@ if uploaded_file is not None:
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
     if st.checkbox("Which state has the highest literacy rate?"):
         highest_literacy = data.groupby('State_name').agg({'Literate': 'mean'}).sort_values(by='Literate', ascending=True).head(1)
-        st.write(f"{highest_literacy.index[0]} has the highest literacy rate of {highest_literacy['Literate'][0]}")
         fig = px.bar(data, x='State_name', y='Literate', title='Literacy rate by state', height=500)
         st.plotly_chart(fig)
     if st.checkbox("Which states have the highest number of male and female workers?"):
