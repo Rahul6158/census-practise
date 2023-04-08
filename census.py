@@ -49,7 +49,7 @@ if uploaded_file is not None:
     
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
         st.write()
-        fig = plt.figure(figsize=(25,12))
+        fig = plt.figure(figsize=(10,5))
         ax1 = plt.subplot(312)
         explode = (0, 0.1, 0, 0)
         labels = ['Sikhs', 'Christians', 'Jains', 'Buddhists']
@@ -75,9 +75,9 @@ if uploaded_file is not None:
     
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue')
-        ax.hist(data['Age_Group_30_49'], bins=10,color='blue')
-        ax.hist(data['Age_Group_50'], bins=10,color='royalblue')
+        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue',histype='bar')
+        ax.hist(data['Age_Group_30_49'], bins=10,color='royalblue')
+        ax.hist(data['Age_Group_50'], bins=10,color='blue')
         ax.set_title('Histogram of Age Group Population')
         ax.set_xlabel('Total Population')
         ax.set_ylabel('Frequency')
