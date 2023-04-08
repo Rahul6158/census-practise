@@ -64,7 +64,7 @@ if uploaded_file is not None:
         st.plotly_chart(fig)
     
     if st.checkbox("Which states have the highest number of male and female workers?"):
-        workers = data.groupby('State_name').agg({'Male_Workers': 'sum', 'Female_Workers': 'sum'}).sort_values(by='Male_Workers', ascending=False).head(10)
+        workers = data.groupby('State_name').agg({'Male_Workers': 'sum', 'Female_Workers': 'sum'}).sort_values(by='Male_Workers', ascending=True).head(10)
         fig = px.bar(workers, x=workers.index, y=['Male_Workers', 'Female_Workers'], title='Number of Male and Female Workers by State', barmode='group', height=500)
         st.plotly_chart(fig)
     
@@ -75,10 +75,10 @@ if uploaded_file is not None:
     
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.hist(data['Age_Group_0_29'], bins=10)
-        ax.hist(data['Age_Group_30_49'], bins=10)
-        ax.hist(data['Age_Group_50'], bins=10)
+        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue')
+        ax.hist(data['Age_Group_30_49'], bins=10,color='yellow')
+        ax.hist(data['Age_Group_50'], bins=10,color='green')
         ax.set_title('Histogram of Age Group Population')
-        ax.set_xlabel('Total Population')
+        ax.set_xlabel('Age Groups')
         ax.set_ylabel('Frequency')
         st.pyplot(fig)
