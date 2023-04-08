@@ -75,9 +75,9 @@ if uploaded_file is not None:
     
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue',title='age 0-29')
-        ax.hist(data['Age_Group_30_49'], bins=10,color='blue',title='age 30-49')
-        ax.hist(data['Age_Group_50'], bins=10,color='indigo',title='age 50>')
+        ax.hist(data['Age_Group_0_29'], bins=10,color='skyblue')
+        ax.hist(data['Age_Group_30_49'], bins=10,color='blue')
+        ax.hist(data['Age_Group_50'], bins=10,color='royalblue')
         ax.set_title('Histogram of Age Group Population')
         ax.set_xlabel('Total Population')
         ax.set_ylabel('Frequency')
