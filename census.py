@@ -77,7 +77,7 @@ if uploaded_file is not None:
         fig, ax = plt.subplots(figsize=(10, 5))
         ax.hist(data['Age_Group_0_29'], bins=10,label='Age 0-29',color='skyblue',edgecolor='black')
         ax.hist(data['Age_Group_30_49'], bins=10,label='Age 30-49',edgecolor='black')
-        ax.hist(data['Age_Group_50'], bins=10,label='Age 50',edgecolor='black')
+        ax.hist(data['Age_Group_50'], bins=10,label='Age 50',color='royalblue',edgecolor='black')
         ax.set_title('Histogram of Age Group Population')
         ax.set_xlabel('Total Population')
         ax.set_ylabel('Frequency')
