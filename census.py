@@ -30,17 +30,23 @@ if uploaded_file is not None:
     st.title("India Census Data Analysis")
     if st.checkbox("What are the columns present in the dataset"):
         st.write(data.columns)
+    
     if st.checkbox("How can we set the caption / heading on the dataframe?"):
         st.write(data.style.set_caption('India Census 2011 Dataset'))
+    
     if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
         st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
+    
     if st.checkbox("Calculate state-wise total number of popluation and population with different religions"):
         st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
+    
     if st.checkbox("How many Male Workers were there in Maharashtra state ?"):
         st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
+    
     if st.checkbox("Which state has the highest population?"):
         highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
         st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
+    
     if st.checkbox("Show the percentages of Religions in India by a piechart"):
         st.write()
         fig = plt.figure(figsize=(25,12))
@@ -51,21 +57,27 @@ if uploaded_file is not None:
         ax1.pie(val, explode=explode, labels=labels, autopct='%1.1f%%', shadow=False, startangle=270)
         plt.title('Pie Chart of Religions')
         st.pyplot(fig)
+    
     if st.checkbox("Which state has the highest literacy rate?"):
         highest_literacy = data.groupby('State_name').agg({'Literate': 'mean'}).sort_values(by='Literate', ascending=True).head(1)
         fig = px.bar(data, x='State_name', y='Literate', title='Literacy rate by state', height=500)
         st.plotly_chart(fig)
+    
     if st.checkbox("Which states have the highest number of male and female workers?"):
         workers = data.groupby('State_name').agg({'Male_Workers': 'sum', 'Female_Workers': 'sum'}).sort_values(by='Male_Workers', ascending=False).head(10)
         fig = px.bar(workers, x=workers.index, y=['Male_Workers', 'Female_Workers'], title='Number of Male and Female Workers by State', barmode='group', height=500)
         st.plotly_chart(fig)
+    
     if st.checkbox("Visualize the population by state as a line chart"):
         pop_data = data.groupby('State_name').agg({'Population': 'sum'}).reset_index()
         fig = px.line(pop_data, x='State_name', y='Population', title='Line Chart Population by State')
         st.plotly_chart(fig)
+    
     if st.checkbox("Histogram for showing the Age Groups"):
         fig, ax = plt.subplots(figsize=(10, 5))
-        ax.hist(data['Total_Population'], bins=10)
+        ax.hist(data['Age_Group_0_29'], bins=10)
+        ax.hist(data['Age_Group_30_49'], bins=10)
+        ax.hist(data['Age_Group_50'], bins=10)
         ax.set_title('Histogram of Age Group Population')
         ax.set_xlabel('Total Population')
         ax.set_ylabel('Frequency')
