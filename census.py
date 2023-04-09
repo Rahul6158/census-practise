@@ -37,7 +37,7 @@ if uploaded_file is not None:
                    "Add suffix to column names", 
                    "Add prefix to column names"))
     
-    if st.checkbox("SOME STATISTICAL OPERATIONS"):
+    if st.checkbox("SOME COLUMN OPERATIONS"):
         if option == "View columns in the dataset":
             st.write(data.columns)
         elif option == "Set a column as index":
