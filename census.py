@@ -31,15 +31,20 @@ if uploaded_file is not None:
 
     if st.checkbox("checking weather the data is preprocessed or NOT ( Any NULL Values )"):
         st.write(data.isnull().sum())
-    if st.checkbox("Some column operations "):
-        if st.checkbox("What are the columns present in the dataset"):
-            st.write(data.columns)
-        if st.checkbox(" How to set a column as index of the dataframe ?"):
-            st.write(data.set_index('District_code'))
-        if st.checkbox("Add a Suffix to the column names"):
-            st.write(data.add_suffix('_rightone'))
-        if st.checkbox("Add a Prefix to the column names"):
-            st.write(data.add_prefix('leftone_'))
+    option = st.radio("Select an operation:", 
+                  ("View columns in the dataset", 
+                   "Set a column as index", 
+                   "Add suffix to column names", 
+                   "Add prefix to column names"))
+
+    if option == "View columns in the dataset":
+        st.write(data.columns)
+    elif option == "Set a column as index":
+        st.write(data.set_index('District_code'))
+    elif option == "Add suffix to column names":
+        st.write(data.add_suffix('_rightone'))
+    elif option == "Add prefix to column names":
+        st.write(data.add_prefix('leftone_'))
    
     if st.checkbox("SOME STATISTICAL OPERATIONS"):
         option = st.radio(
