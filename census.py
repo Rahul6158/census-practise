@@ -36,15 +36,16 @@ if uploaded_file is not None:
                    "Set a column as index", 
                    "Add suffix to column names", 
                    "Add prefix to column names"))
-
-    if option == "View columns in the dataset":
-        st.write(data.columns)
-    elif option == "Set a column as index":
-        st.write(data.set_index('District_code'))
-    elif option == "Add suffix to column names":
-        st.write(data.add_suffix('_rightone'))
-    elif option == "Add prefix to column names":
-        st.write(data.add_prefix('leftone_'))
+    
+    if st.checkbox("SOME COLUMN OPERATIONS "):
+        if option == "View columns in the dataset":
+            st.write(data.columns)
+        elif option == "Set a column as index":
+            st.write(data.set_index('District_code'))
+        elif option == "Add suffix to column names":
+            st.write(data.add_suffix('_rightone'))
+        elif option == "Add prefix to column names":
+            st.write(data.add_prefix('leftone_'))
    
     if st.checkbox("SOME STATISTICAL OPERATIONS"):
         option = st.radio(
