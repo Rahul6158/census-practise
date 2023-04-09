@@ -65,33 +65,16 @@ if uploaded_file is not None:
 
         if option == 'Calculate the total population of India according to the 2011 Census?':
             total_population = data['Population'].sum()
-            st.write("Total Population of India according to the 2011 Census is:", total_population)
+            st.write("Total Population of India according to the 2011 Census is: ",total_population)
 
         if option == 'Which state has the highest population ?':
             highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
-            st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
+            st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more") 
 
-        
         if option == 'Calculate the correlation coefficient between two Attributes':
             corr = data['Male_Workers'].corr(data['Female_Workers'])
             st.write("Correlation coefficient:", corr)
-
-    def calc_pop_density(population, area):
-        return population / area
-
-    def indian_census():
-        st.title("India Population Density Calculator")
-
-        # Get user input for population and area
-        population = st.number_input("Enter India's population in 2011:")
-        area = st.number_input("Enter India's land area in square kilometers:")
-
-        if population and area:
-            pop_density = calc_pop_density(population, area)
-            st.write("The population density of India in 2011 was:", pop_density, "people per square kilometer")
-    if __name__ == '__main__':
-        indian_census()
-        
+     
     if st.header("\nData visualizations"):
         if st.checkbox("Show the percentages of Religions in India by a piechart"):
             st.write()
@@ -125,6 +108,21 @@ if uploaded_file is not None:
             ax.set_ylabel('Frequency')
             plt.legend()
             st.pyplot(fig)
+
+    def calc_pop_density(population, area):
+        return population / area
+
+    def indian_census():
+        st.title("India Population Density Calculator")
+        population = st.number_input("Enter India's population in 2011:")
+        area = st.number_input("Enter India's land area in square kilometers:")
+
+        if population and area:
+            pop_density = calc_pop_density(population, area)
+            st.write("The population density of India in 2011 was:", pop_density, "people per square kilometer")
+    if __name__ == '__main__':
+        indian_census()
+   
         
     if st.header("Check the Details of Selected States and Districts"):
         state_options = data["State_name"].unique()
