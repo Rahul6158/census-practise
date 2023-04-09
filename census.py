@@ -64,8 +64,7 @@ if uploaded_file is not None:
             st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
 
         if option == 'Calculate the total population of India according to the 2011 Census?':
-            total_population = data['Population'].sum()
-            st.write("Total Population of India according to the 2011 Census is: ",total_population)
+            st.write("Total Population of India according to the 2011 Census is: ",data['Population'].sum())
 
         if option == 'Which state has the highest population ?':
             highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
@@ -113,7 +112,7 @@ if uploaded_file is not None:
         return population / area
 
     def indian_census():
-        st.title("India Population Density Calculator")
+        st.header("India Population Density Calculator")
         population = st.number_input("Enter India's population in 2011:")
         area = st.number_input("Enter India's land area in square kilometers:")
 
