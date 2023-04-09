@@ -29,9 +29,9 @@ if uploaded_file is not None:
     
     st.title("India Census Data Analysis")
 
-    if st.checkbox("checking weather the data is preprocessed or NOT !?"):
+    if st.checkbox("checking weather the data is preprocessed or NOT ( Any NULL Values )"):
         st.write(data.isnull().sum())
-    if st.checkbox("Perform some column operations :"):
+    if st.checkbox("Some column operations "):
         if st.checkbox("What are the columns present in the dataset"):
             st.write(data.columns)
         if st.checkbox(" How to set a column as index of the dataframe ?"):
@@ -46,7 +46,7 @@ if uploaded_file is not None:
         'Select an operation',
         ('Calculate state-wise total number of population and population with different religions',
         'How many Male Workers were there in Maharashtra state ?', 'Calculate the total population of India according to the 2011 Census?',
-        'Which state has the highest population?', 'Find the statewise population of India')
+        'Which state has the highest population?', 'Find the statewise population of India','Calculate the correlation coefficient between two Attributes')
 )
 
         if option == 'Perform some statistical operations':
@@ -62,28 +62,15 @@ if uploaded_file is not None:
             total_population = data['Population'].sum()
             st.write("Total Population of India according to the 2011 Census is:", total_population)
 
-        if option == 'Which state has the highest population?':
+        if option == 'Which state has the highest population ?':
             highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
             st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
 
-        if option == 'Find the statewise population of India':
-            state = st.selectbox('Select a state:', sorted(data['State_name'].unique()))
-            state_data = data[data['State_name'] == state]
-            district_populations = state_data.groupby('District_name')['Population'].sum()
-            st.write('Total population by district in', state, ':')
-            st.write(district_populations)
         
-        if st.checkbox("Calculate the correlation coefficient between two Attributes"):
+        if option == 'Calculate the correlation coefficient between two Attributes':
             corr = data['Male_Workers'].corr(data['Female_Workers'])
             st.write("Correlation coefficient:", corr)
 
-    if st.checkbox("Correlation heatmap between two similar columns"):
-            corr_matrix = data.iloc[:,3:7].corr()
-            fig,ax=plt.subplots()
-            sns.heatmap(corr_matrix)
-            plt.title("Correlation Heatmap :")
-            st.pyplot(fig)
-    
     def calc_pop_density(population, area):
         return population / area
 
@@ -100,7 +87,7 @@ if uploaded_file is not None:
     if __name__ == '__main__':
         indian_census()
         
-    if st.checkbox("Data visualizations -->>"):
+    if st.header("\nData visualizations"):
         if st.checkbox("Show the percentages of Religions in India by a piechart"):
             st.write()
             fig = plt.figure(figsize=(50,25))
