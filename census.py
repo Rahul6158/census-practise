@@ -48,13 +48,9 @@ if uploaded_file is not None:
    
     if st.checkbox("SOME STATISTICAL OPERATIONS"):
         option = st.radio(
-        'Select an operation',
-        ('Perform some statistical operations','Calculate state-wise total number of population and population with different religions',
+        ('Calculate state-wise total number of population and population with different religions',
         'How many Male Workers were there in Maharashtra state ?', 'Calculate the total population of India according to the 2011 Census ?',
-        'Which state has the highest population ?','Calculate the correlation coefficient between two Attributes'))
-
-        if option == 'Perform some statistical operations (mean,medin,mode,etc...)':
-         st.write(data.describe())
+        'Which state has the highest population ?', 'Find the statewise population of India','Calculate the correlation coefficient between two Attributes'))
 
         if option == 'Calculate state-wise total number of population and population with different religions':
             st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
