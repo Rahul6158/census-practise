@@ -41,39 +41,43 @@ if uploaded_file is not None:
         if st.checkbox("Add a Prefix to the column names"):
             st.write(data.add_prefix('leftone_'))
    
-    if st.checkbox("PERFORM SOME STATISTICAL OPERATIONS"):
-        st.write(data.describe())
-    
-    if st.radio("Calculate state-wise total number of popluation and population with different religions"):
-        st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
-    
-    if st.radio("How many Male Workers were there in Maharashtra state ?"):
-        st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
-    
-    if st.radio("Calculate the total population of India according to the 2011 Census?"):
-        total_population = data['Population'].sum()
-        st.write("Total Population of India according to the 2011 Census is:", total_population)
-    
-    if st.checkbox("Which state has the highest population?"):
-        highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
-        st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
-    
-    if st.checkbox("Find the statewise population  of India "):
-        state = st.selectbox('Select a state:', sorted(data['State_name'].unique()))
-        state_data = data[data['State_name'] == state]
-        district_populations = state_data.groupby('District_name')['Population'].sum()
-        st.write('Total population by district in', state, ':')
-        st.write(district_populations)
-    
-        
-    if st.checkbox("Show the records related with the districts - New Delhi , Lucknow , Jaipur"):
-        st.write(data[data['District_name'].isin(['New Delhi', 'Lucknow', 'Jaipur'])])
-    
-    if st.checkbox("Calculate the correlation coefficient between two Attributes"):
-        corr = data['Male_Workers'].corr(data['Female_Workers'])
-        st.write("Correlation coefficient:", corr)
+    if st.checkbox("SOME STATISTICAL OPERATIONS"):
+        option = st.radio(
+        'Select an operation',
+        ('Calculate state-wise total number of population and population with different religions',
+        'How many Male Workers were there in Maharashtra state ?', 'Calculate the total population of India according to the 2011 Census?',
+        'Which state has the highest population?', 'Find the statewise population of India')
+)
 
-        if st.checkbox("Correlation heatmap between two similar columns"):
+        if option == 'Perform some statistical operations':
+         st.write(data.describe())
+
+        if option == 'Calculate state-wise total number of population and population with different religions':
+            st.write(data.groupby('State_name').agg({'Population': 'sum', 'Hindus': 'sum', 'Muslims': 'sum', 'Christians': 'sum', 'Sikhs': 'sum', 'Buddhists': 'sum', 'Jains': 'sum'}).sort_values(by='Population', ascending=False))
+
+        if option == 'How many Male Workers were there in Maharashtra state ?':
+            st.write(data[data.State_name == 'MAHARASHTRA']['Male_Workers'].sum())
+
+        if option == 'Calculate the total population of India according to the 2011 Census?':
+            total_population = data['Population'].sum()
+            st.write("Total Population of India according to the 2011 Census is:", total_population)
+
+        if option == 'Which state has the highest population?':
+            highest_population = data.groupby('State_name').agg({'Population': 'sum'}).sort_values(by='Population', ascending=False).head(1)
+            st.write(f"{highest_population.index[0]} has the highest population of {highest_population['Population'][0]} it is beacause the no of districts in uttar pradesh is more")
+
+        if option == 'Find the statewise population of India':
+            state = st.selectbox('Select a state:', sorted(data['State_name'].unique()))
+            state_data = data[data['State_name'] == state]
+            district_populations = state_data.groupby('District_name')['Population'].sum()
+            st.write('Total population by district in', state, ':')
+            st.write(district_populations)
+        
+        if st.checkbox("Calculate the correlation coefficient between two Attributes"):
+            corr = data['Male_Workers'].corr(data['Female_Workers'])
+            st.write("Correlation coefficient:", corr)
+
+    if st.checkbox("Correlation heatmap between two similar columns"):
             corr_matrix = data.iloc[:,3:7].corr()
             fig,ax=plt.subplots()
             sns.heatmap(corr_matrix)
