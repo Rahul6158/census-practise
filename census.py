@@ -48,6 +48,7 @@ if uploaded_file is not None:
    
     if st.checkbox("SOME STATISTICAL OPERATIONS"):
         option = st.radio(
+        'Select an operation',
         ('Calculate state-wise total number of population and population with different religions',
         'How many Male Workers were there in Maharashtra state ?', 'Calculate the total population of India according to the 2011 Census ?',
         'Which state has the highest population ?', 'Find the statewise population of India','Calculate the correlation coefficient between two Attributes'))
