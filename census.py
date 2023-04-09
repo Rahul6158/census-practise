@@ -31,13 +31,12 @@ if uploaded_file is not None:
 
     if st.checkbox("checking weather the data is preprocessed or NOT ( Any NULL Values )"):
         st.write(data.isnull().sum())
-    option = st.radio("Select an operation:", 
+    if st.checkbox("SOME COLUMN OPERATIONS"):
+      option = st.radio("Select an operation:", 
                   ("View columns in the dataset", 
                    "Set a column as index", 
                    "Add suffix to column names", 
                    "Add prefix to column names"))
-    
-    if st.checkbox("SOME COLUMN OPERATIONS"):
         if option == "View columns in the dataset":
             st.write(data.columns)
         elif option == "Set a column as index":
